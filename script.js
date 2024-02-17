@@ -5,9 +5,17 @@ function calcularPromedio() {
     const grade3 = parseInt(document.getElementById('grade3').value);
   
     const promedio = ((grade1 * grade0) + (grade2 * grade0) + (grade3 * grade0));
+    
 
     
-  
-    document.getElementById('resultado').innerText = `El Valor total es $: ${promedio.toFixed(2)}`;
-  }
+    Swal.fire({
+      title: 'Monto a Pagar',
+      text: `El Valor Total es :$ ${promedio.toFixed(2)}`,
+      icon: 'success',
+      confirmButtonText: 'Cerrar'
+    });
+
+    //alert(`El Valor Total es $: ${promedio.toFixed(2)}`);
+    //document.getElementById('resultado').innerText = `El Valor total es $: ${promedio.toFixed(2)}`;
+    }
   
