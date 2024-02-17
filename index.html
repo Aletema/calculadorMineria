@@ -16,15 +16,19 @@
     <form id="gradeCalculator" class="gradeCalculator">
         <h2>COLOCAR VALOR DEL MINERAL:</h2>
         <label for="grade0"></label>
-        <input type="number" id="grade0" placeholder="V.M" class="grade0" value="0" required />
+        <input type="number" id="grade0" placeholder="$" class="grade0" value="0" required />
         <label for="grade1">Talonario 1:</label>
-        <input type="number" id="grade1" placeholder="M³/Tn"  value="0" required />
+        <input type="number" id="grade1" placeholder="M³/Tn" value="0" required />
         <label for="grade2">Talonario 2:</label>
-        <input type="number" id="grade2" placeholder="M³/Tn" value="0" >
+        <input type="number" id="grade2" placeholder="M³/Tn" value="0">
         <label for="grade3">Talonario 3:</label>
-        <input type="number" id="grade3" placeholder="M³/Tn" value="0" >
+        <input type="number" id="grade3" placeholder="M³/Tn" value="0">
+
+       
+        <label for="grade3" class="oculto">Talonario 4:</label>
+        <input type="number" id="grade4" class="oculto" placeholder="M³/Tn" value="0">
         <button type="button" onclick="calcularPromedio()">CALCULAR VALOR TOTAL</button>
-        <p id="resultado"></p>
+        <button onclick="mostrarInput()" class="mostrarInput">AGREGAR TALONARIO</button>
     </form>
     <section>
         <div><a href="./index.html">HACER OTRO CÁLCULO</a>

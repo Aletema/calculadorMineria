@@ -3,6 +3,10 @@ body {
     text-align: center;
 }
 
+button .mostrarInput{
+text-align: end;
+margin-left: 125px;
+}
 a {
     margin-top: 60px;
     margin-bottom: 30px;
