@@ -1,60 +1,110 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Mont', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200vh;
     text-align: center;
 }
 
-button .mostrarInput{
-text-align: end;
-margin-left: 125px;
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
 }
-a {
-    margin-top: 60px;
-    margin-bottom: 30px;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
+
+h1 {
+    color: #333333;
+    margin-bottom: 20px;
 }
 
 img {
-    width: 300px;
-    margin-bottom: 50px;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
 }
 
 form {
+    background-color: #016d54;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 50px;
-    background-color: #016d54;
-    border-radius: 5px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.input-group label {
+    margin-bottom: 5px;
 }
 
 input {
-    margin-bottom: 15px;
-    width: 250px;
-    height: 25px;
+    width: 100%;
+    padding: 10px;
     border-radius: 5px;
-    font-size: 20px;
+    border: 1px solid #cccccc;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .grade0 {
-    width: 125px;
-    height: 75px;
-    font-size: 50px;
+    width: 100%;
+    height: 60px;
+    font-size: 30px;
+}
+
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 button {
-    margin-top: 15px;
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 48%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+a {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
     border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: darkred;
 }
