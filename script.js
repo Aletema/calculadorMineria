@@ -36,28 +36,28 @@ function quitarInput() {
 }
 
 function calcularPromedio() {
-    const grade0 = parseFloat(document.getElementById('grade0').value);
-    const values = [];
+  const grade0 = parseFloat(document.getElementById('grade0').value);
+  const values = [];
 
-    for (let i = 1; i <= contadorTalonarios; i++) {
-        values.push(parseFloat(document.getElementById(`grade${i}`).value));
-    }
+  for (let i = 1; i <= contadorTalonarios; i++) {
+      values.push(parseFloat(document.getElementById(`grade${i}`).value));
+  }
 
-    const promedio = values.reduce((acc, val) => acc + (val * grade0), 0);
+  const promedio = values.reduce((acc, val) => acc + (val * grade0), 0);
 
-    if (promedio > 0) {
-        Swal.fire({
-            title: 'Monto a Pagar',
-            text: `El Valor Total es: ${new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'USD' }).format(promedio)}`,
-            icon: 'success',
-            confirmButtonText: 'Cerrar'
-        });
-    } else {
-        Swal.fire({
-            title: 'Error',
-            text: 'Debe ingresar valores para hacer el cálculo!',
-            icon: 'error',
-            confirmButtonText: 'Cerrar'
-        });
-    }
+  if (promedio > 0) {
+      Swal.fire({
+          title: 'Monto a Pagar',
+          html: `<p>El Valor Total es:</p><p style="font-size: 24px; font-weight: bold;">${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(promedio)}</p>`,
+          icon: 'success',
+          confirmButtonText: 'Cerrar'
+      });
+  } else {
+      Swal.fire({
+          title: 'Error',
+          text: 'Debe ingresar valores para hacer el cálculo!',
+          icon: 'error',
+          confirmButtonText: 'Cerrar'
+      });
+  }
 }
