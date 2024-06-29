@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.cdnfonts.com/css/mont" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
     <title>Calculadora de M³/Tn</title>
 </head>
 
@@ -112,12 +114,13 @@
 
             <!-- Indicadores -->
             <div class="indicadores">
-                <p id="totalM3Tn">Total M³/Tn: 0</p>
-                <p id="valorTotal">Valor Total: $0.00</p>
+                <p id="totalM3Tn"><strong>Total M³-Tn: 0 </strong></p>
+                <p id="valorTotal"><strong>Valor Total: $0.00 </strong></p>
             </div>
 
             <div class="button-group">
                 <button type="button" class="calcular" onclick="calcularPromedio()">CALCULAR VALOR TOTAL</button>
+                <button type="button" class="descargar" onclick="descargarTabla()">DESCARGAR INFORME</button>
             </div>
             <div class="button-group">
                 <button type="button" class="quitar" onclick="quitarInput()">QUITAR TALONARIO</button>

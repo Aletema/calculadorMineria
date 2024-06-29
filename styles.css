@@ -184,3 +184,10 @@ section a {
 section a:hover {
     background-color: #e0a800;
 }
+.button-group .descargar {
+    background-color: #17a2b8;
+}
+
+.button-group .descargar:hover {
+    background-color: #138496;
+}

@@ -93,6 +93,39 @@ function calcularPromedio() {
     }
 }
 
+function descargarTabla() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const grade0 = parseFloat(document.getElementById('grade0').value) || 0;
+    let totalM3Tn = 0;
+    let valorTotal = 0;
+    let filas = [];
+
+    for (let i = 1; i <= contadorTalonarios; i++) {
+        const fromValue = document.getElementById(`from${i}`).value;
+        const toValue = document.getElementById(`to${i}`).value;
+        const gradeValue = parseFloat(document.getElementById(`grade${i}`).value) || 0;
+        const valorTalonario = gradeValue * grade0;
+
+        totalM3Tn += gradeValue;
+        valorTotal += valorTalonario;
+
+        filas.push([`Talonario ${i}`, fromValue, toValue, gradeValue, valorTalonario.toFixed(2)]);
+    }
+
+    filas.push(["Total", "", "", totalM3Tn, valorTotal.toFixed(2)]);
+
+    doc.text("Informe de Talonarios", 20, 20);
+    doc.autoTable({
+        head: [["Talonario", "Desde", "Hasta", "M³/Tn", "Valor"]],
+        body: filas,
+        startY: 30
+    });
+
+    doc.save("informe_talonarios.pdf");
+}
+
 // Initial call to update indicators on page load
 document.addEventListener("DOMContentLoaded", function() {
     updateIndicators();
