@@ -3,7 +3,7 @@ let contadorTalonarios = 4;
 function mostrarInput() {
     if (contadorTalonarios < 10) {
         contadorTalonarios++;
-        const inputGroup = document.querySelector(`.input-group:nth-of-type(${contadorTalonarios + 1})`);
+        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 3})`); // +3 para ajustarse a los nuevos inputs
         if (inputGroup) {
             inputGroup.classList.remove('oculto');
         }
@@ -20,7 +20,7 @@ function mostrarInput() {
 
 function quitarInput() {
     if (contadorTalonarios > 1) {
-        const inputGroup = document.querySelector(`.input-group:nth-of-type(${contadorTalonarios + 1})`);
+        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 3})`); // +3 para ajustarse a los nuevos inputs
         if (inputGroup) {
             inputGroup.classList.add('oculto');
             document.getElementById(`grade${contadorTalonarios}`).value = "0";
@@ -97,6 +97,8 @@ function descargarTabla() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
+    const nombrePM = document.getElementById('nombrePM').value;
+    const numeroPM = document.getElementById('numeroPM').value;
     const grade0 = parseFloat(document.getElementById('grade0').value) || 0;
     let totalM3Tn = 0;
     let valorTotal = 0;
@@ -117,10 +119,12 @@ function descargarTabla() {
     filas.push(["Total", "", "", totalM3Tn, valorTotal.toFixed(2)]);
 
     doc.text("Informe de Talonarios", 20, 20);
+    doc.text(`Nombre de PM: ${nombrePM}`, 20, 30);
+    doc.text(`N° de PM: ${numeroPM}`, 20, 40);
     doc.autoTable({
         head: [["Talonario", "Desde", "Hasta", "M³/Tn", "Valor"]],
         body: filas,
-        startY: 30
+        startY: 50
     });
 
     doc.save("informe_talonarios.pdf");

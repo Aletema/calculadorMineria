@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 180vh;
+    height: 300vh;
     text-align: center;
 }
 
@@ -165,6 +165,9 @@ a:hover {
 .button-group .agregar {
     background-color: #28a745;
 }
+.button-group .descargar{
+    background-color: gray;
+}
 
 .button-group .quitar {
     background-color: #dc3545;
@@ -184,10 +187,18 @@ section a {
 section a:hover {
     background-color: #e0a800;
 }
-.button-group .descargar {
-    background-color: #17a2b8;
+
+/* Estilos para fieldset y legend */
+fieldset {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #016d54;
 }
 
-.button-group .descargar:hover {
-    background-color: #138496;
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+    color: #ffffff;
 }
