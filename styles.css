@@ -64,10 +64,39 @@ input {
     box-sizing: border-box;
 }
 
+.numeracion {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Espacio entre los inputs */
+}
+
+.numeracion input {
+    flex: 1; /* Para que ambos inputs tengan el mismo ancho */
+}
+
 .grade0 {
     width: 100%;
     height: 60px;
     font-size: 30px;
+}
+
+.indicadores {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.indicadores p {
+    margin: 0;
+    padding: 10px;
+    background-color: #ffffff;
+    color: #333333;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    text-align: center;
 }
 
 .button-group {
@@ -108,6 +137,7 @@ a {
 a:hover {
     background-color: darkred;
 }
+
 .oculto {
     display: none;
 }
