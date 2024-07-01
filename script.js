@@ -62,8 +62,11 @@ function updateIndicators() {
         valorTotal += gradeValue * grade0;
     }
 
-    document.getElementById('totalM3Tn').textContent = `Total M³/Tn: ${totalM3Tn}`;
-    document.getElementById('valorTotal').textContent = `Valor Total: $${valorTotal.toFixed(2)}`;
+    const totalM3TnFormatted = new Intl.NumberFormat('es-MX').format(totalM3Tn);
+    const valorTotalFormatted = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(valorTotal);
+
+    document.getElementById('totalM3Tn').innerHTML = `<strong>Total M³/Tn: ${totalM3TnFormatted}</strong>`;
+    document.getElementById('valorTotal').innerHTML = `<strong>Valor Total: ${valorTotalFormatted}</strong>`;
 }
 
 function calcularPromedio() {
@@ -169,7 +172,6 @@ function descargarTabla() {
 
     doc.save("informe_talonarios.pdf");
 }
-
 
 // Initial call to update indicators on page load
 document.addEventListener("DOMContentLoaded", function() {
