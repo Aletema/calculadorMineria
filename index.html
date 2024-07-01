@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
     <title>Calculadora de M³/Tn</title>
 </head>
-
 <body>
     <div class="container">
         <h1>CALCULADORA DE MINERÍA</h1>
         <img src="https://i.ibb.co/bs3rGRL/Dimensiones-personalizadas-772x194-px.jpg" alt="Imagen">
-
         <form id="gradeCalculator" class="gradeCalculator">
             <h2>CALCULADORA DE M³-TN</h2>
-            
             <div class="input-group">
                 <label for="nombrePM">Nombre de PM:</label>
                 <input type="text" id="nombrePM" placeholder="Ingrese nombre" required />
@@ -28,155 +24,142 @@
                 <label for="numeroPM">N° de PM:</label>
                 <input type="text" id="numeroPM" placeholder="Ingrese número" required />
             </div>
-            
             <div class="input-group">
                 <label for="grade0">Precio Unitario del Mineral:</label>
                 <input type="number" id="grade0" placeholder="$" class="grade0" value="0" required oninput="updateIndicators()" />
             </div>
-
             <!-- Group box para Talonarios -->
             <fieldset>
                 <legend>Talonario 1</legend>
                 <div class="input-group">
-                    <label for="range1">Numeración Talonario 1:</label>
+                    <label for="range1">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from1" placeholder="Desde" oninput="autoCompleteTo(1)" required />
                         <input type="number" id="to1" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade1">Talonario 1:</label>
+                    <label for="grade1">M³-Tn:</label>
                     <input type="number" id="grade1" placeholder="M³/Tn" value="0" required oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset>
                 <legend>Talonario 2</legend>
                 <div class="input-group">
-                    <label for="range2">Numeración Talonario 2:</label>
+                    <label for="range2">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from2" placeholder="Desde" oninput="autoCompleteTo(2)" />
                         <input type="number" id="to2" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade2">Talonario 2:</label>
+                    <label for="grade2">M³-Tn:</label>
                     <input type="number" id="grade2" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset>
                 <legend>Talonario 3</legend>
                 <div class="input-group">
-                    <label for="range3">Numeración Talonario 3:</label>
+                    <label for="range3">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from3" placeholder="Desde" oninput="autoCompleteTo(3)" />
                         <input type="number" id="to3" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade3">Talonario 3:</label>
+                    <label for="grade3">M³-Tn:</label>
                     <input type="number" id="grade3" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
-            <fieldset>
+            <fieldset class="oculto">
                 <legend>Talonario 4</legend>
                 <div class="input-group">
-                    <label for="range4">Numeración Talonario 4:</label>
+                    <label for="range4">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from4" placeholder="Desde" oninput="autoCompleteTo(4)" />
                         <input type="number" id="to4" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade4">Talonario 4:</label>
+                    <label for="grade4">M³-Tn:</label>
                     <input type="number" id="grade4" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
-            <!-- Inputs adicionales pero ocultos -->
             <fieldset class="oculto">
                 <legend>Talonario 5</legend>
                 <div class="input-group">
-                    <label for="range5">Numeración Talonario 5:</label>
+                    <label for="range5">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from5" placeholder="Desde" oninput="autoCompleteTo(5)" />
                         <input type="number" id="to5" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade5">Talonario 5:</label>
+                    <label for="grade5">M³-Tn:</label>
                     <input type="number" id="grade5" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset class="oculto">
                 <legend>Talonario 6</legend>
                 <div class="input-group">
-                    <label for="range6">Numeración Talonario 6:</label>
+                    <label for="range6">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from6" placeholder="Desde" oninput="autoCompleteTo(6)" />
                         <input type="number" id="to6" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade6">Talonario 6:</label>
+                    <label for="grade6">M³-Tn:</label>
                     <input type="number" id="grade6" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset class="oculto">
                 <legend>Talonario 7</legend>
                 <div class="input-group">
-                    <label for="range7">Numeración Talonario 7:</label>
+                    <label for="range7">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from7" placeholder="Desde" oninput="autoCompleteTo(7)" />
                         <input type="number" id="to7" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade7">Talonario 7:</label>
+                    <label for="grade7">M³-Tn:</label>
                     <input type="number" id="grade7" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset class="oculto">
                 <legend>Talonario 8</legend>
                 <div class="input-group">
-                    <label for="range8">Numeración Talonario 8:</label>
+                    <label for="range8">:</label>
                     <div class="numeracion">
                         <input type="number" id="from8" placeholder="Desde" oninput="autoCompleteTo(8)" />
                         <input type="number" id="to8" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade8">Talonario 8:</label>
+                    <label for="grade8">M³-Tn:</label>
                     <input type="number" id="grade8" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <fieldset class="oculto">
                 <legend>Talonario 9</legend>
                 <div class="input-group">
-                    <label for="range9">Numeración Talonario 9:</label>
+                    <label for="range9">Numeración:</label>
                     <div class="numeracion">
                         <input type="number" id="from9" placeholder="Desde" oninput="autoCompleteTo(9)" />
                         <input type="number" id="to9" placeholder="Hasta" readonly />
                     </div>
                 </div>
                 <div class="input-group">
-                    <label for="grade9">Talonario 9:</label>
+                    <label for="grade9">M³-Tn:</label>
                     <input type="number" id="grade9" placeholder="M³/Tn" value="0" oninput="updateIndicators()" />
                 </div>
             </fieldset>
-
             <!-- Indicadores -->
             <div class="indicadores">
                 <p id="totalM3Tn"><strong>Total M³-Tn: 0 </strong></p>
                 <p id="valorTotal"><strong>Valor Total: $0.00 </strong></p>
             </div>
-
             <div class="button-group">
                 <button type="button" class="calcular" onclick="calcularPromedio()">CALCULAR VALOR TOTAL</button>
                 <button type="button" class="descargar" onclick="descargarTabla()">DESCARGAR INFORME</button>
@@ -186,13 +169,10 @@
                 <button type="button" class="agregar" onclick="mostrarInput()">AGREGAR TALONARIO</button>
             </div>
         </form>
-
         <section>
             <a href="./index.html">HACER OTRO CÁLCULO</a>
         </section>
     </div>
-
     <script src="script.js"></script>
 </body>
-
 </html>

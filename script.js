@@ -1,9 +1,9 @@
-let contadorTalonarios = 4;
+let contadorTalonarios = 3;
 
 function mostrarInput() {
-    if (contadorTalonarios < 10) {
+    if (contadorTalonarios < 9) {
         contadorTalonarios++;
-        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 3})`); // +3 para ajustarse a los nuevos inputs
+        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 0})`); // +3 para ajustarse a los nuevos inputs
         if (inputGroup) {
             inputGroup.classList.remove('oculto');
         }
@@ -20,7 +20,7 @@ function mostrarInput() {
 
 function quitarInput() {
     if (contadorTalonarios > 1) {
-        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 3})`); // +3 para ajustarse a los nuevos inputs
+        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 0})`); // +3 para ajustarse a los nuevos inputs
         if (inputGroup) {
             inputGroup.classList.add('oculto');
             document.getElementById(`grade${contadorTalonarios}`).value = "0";
@@ -97,23 +97,63 @@ function descargarTabla() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
 
-    const nombrePM = document.getElementById('nombrePM').value;
-    const numeroPM = document.getElementById('numeroPM').value;
+    const nombrePM = document.getElementById('nombrePM').value.trim();
+    const numeroPM = document.getElementById('numeroPM').value.trim();
     const grade0 = parseFloat(document.getElementById('grade0').value) || 0;
     let totalM3Tn = 0;
     let valorTotal = 0;
     let filas = [];
+    let valid = true; // Variable para validar los inputs
+
+    // Verificar si los campos nombrePM y numeroPM están vacíos
+    if (!nombrePM || !numeroPM) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Debe ingresar el Nombre de PM y el Número de PM.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+        return;
+    }
+
+    // Verificar si el campo grade0 es válido
+    if (grade0 <= 0) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Debe ingresar un precio unitario del mineral válido.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+        return;
+    }
 
     for (let i = 1; i <= contadorTalonarios; i++) {
-        const fromValue = document.getElementById(`from${i}`).value;
-        const toValue = document.getElementById(`to${i}`).value;
+        const fromValue = document.getElementById(`from${i}`).value.trim();
+        const toValue = document.getElementById(`to${i}`).value.trim();
         const gradeValue = parseFloat(document.getElementById(`grade${i}`).value) || 0;
-        const valorTalonario = gradeValue * grade0;
 
+        // Verificar si los campos de talonario están vacíos o si los valores son no válidos
+        if (!fromValue || !toValue || gradeValue <= 0) {
+            valid = false;
+            break;
+        }
+
+        const valorTalonario = gradeValue * grade0;
         totalM3Tn += gradeValue;
         valorTotal += valorTalonario;
 
         filas.push([`Talonario ${i}`, fromValue, toValue, gradeValue, valorTalonario.toFixed(2)]);
+    }
+
+    // Mostrar un mensaje de error si hay campos vacíos o no válidos
+    if (!valid) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Debe completar todos los campos de los talonarios con valores válidos.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+        return;
     }
 
     filas.push(["Total", "", "", totalM3Tn, valorTotal.toFixed(2)]);
@@ -129,6 +169,7 @@ function descargarTabla() {
 
     doc.save("informe_talonarios.pdf");
 }
+
 
 // Initial call to update indicators on page load
 document.addEventListener("DOMContentLoaded", function() {
