@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300vh;
+    height: 350vh;
     text-align: center;
 }
 
@@ -203,4 +203,38 @@ legend {
     padding: 0 10px;
     font-weight: bold;
     color: #ffffff;
+}
+h1 {
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555555;
+    font-size: 18px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #cccccc;
+    text-align: left;
+}
+
+th {
+    background-color: #016d54;
+    color: white;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e0e0e0;
 }
