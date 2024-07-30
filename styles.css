@@ -3,20 +3,33 @@ body {
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 300vh;
-    text-align: center;
 }
 
-.container {
-    background-color: #ffffff;
+header {
+   
+    padding: 10px 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.main-container {
+    text-align: center;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 600px;
+    margin: 0 auto;
+    background-color: gray;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -24,25 +37,73 @@ h1 {
     margin-bottom: 20px;
 }
 
-img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin-bottom: 30px;
-    border-radius: 10px;
+.button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
-form {
-    background-color: #016d54;
+.button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: -100%;
+        background-color: #1E1E1E;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .burger {
+        display: flex;
+    }
+}
+
+.form-container {
+    background-color: #1E1E1E;
     padding: 20px;
     border-radius: 10px;
     color: #ffffff;
+    border: 3px solid #3389FF;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
 }
-
-h2 {
-    margin-bottom: 20px;
+.valor-container{
+    
+    padding: 20px;
+    border-radius: 10px;
+    color: black;
+    border: 3px solid #3389FF;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
 }
-
 .input-group {
     margin-bottom: 15px;
     display: flex;
@@ -68,11 +129,11 @@ input {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 10px; /* Espacio entre los inputs */
+    gap: 10px;
 }
 
 .numeracion input {
-    flex: 1; /* Para que ambos inputs tengan el mismo ancho */
+    flex: 1;
 }
 
 .grade0 {
@@ -115,7 +176,6 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 48%;
     box-sizing: border-box;
 }
 
@@ -123,20 +183,10 @@ button:hover {
     background-color: #45a049;
 }
 
-a {
-    margin-top: 20px;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
 
 a:hover {
-    background-color: darkred;
+    background-color: black;
+    border-radius: 5px;
 }
 
 .oculto {
@@ -190,23 +240,18 @@ section a:hover {
     background-color: #e0a800;
 }
 
-/* Estilos para fieldset y legend */
-fieldset {
-    border: 1px solid #cccccc;
+form fieldset {
+    border: 3px solid #3389FF;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 20px;
-    background-color: #016d54;
+    margin-bottom: 30px;
+    background-color: #424242;
 }
 
 legend {
     padding: 0 10px;
     font-weight: bold;
     color: #ffffff;
-}
-h1 {
-    color: #333333;
-    margin-bottom: 20px;
 }
 
 p {
@@ -220,7 +265,8 @@ table {
     margin: 20px 0;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     border: 1px solid #cccccc;
     text-align: left;
@@ -237,4 +283,12 @@ tbody tr:nth-child(odd) {
 
 tbody tr:nth-child(even) {
     background-color: #e0e0e0;
+}
+.valor-talonario-input {
+    background-color: #333333; /* Color de fondo oscuro */
+    color: #ffffff; /* Color del texto claro */
+    border: 1px solid #cccccc;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
 }

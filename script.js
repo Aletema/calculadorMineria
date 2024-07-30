@@ -1,16 +1,20 @@
 let contadorTalonarios = 3;
 
+document.addEventListener("DOMContentLoaded", function() {
+    updateIndicators();
+});
+
 function mostrarInput() {
     if (contadorTalonarios < 9) {
         contadorTalonarios++;
-        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 0})`); // +3 para ajustarse a los nuevos inputs
-        if (inputGroup) {
-            inputGroup.classList.remove('oculto');
+        const fieldset = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios})`);
+        if (fieldset) {
+            fieldset.classList.remove('oculto');
         }
     } else {
         Swal.fire({
             title: 'Límite alcanzado',
-            text: 'No se pueden agregar más de 10 talonarios.',
+            text: 'No se pueden agregar más de 9 talonarios.',
             icon: 'warning',
             confirmButtonText: 'Cerrar'
         });
@@ -20,12 +24,13 @@ function mostrarInput() {
 
 function quitarInput() {
     if (contadorTalonarios > 1) {
-        const inputGroup = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios + 0})`); // +3 para ajustarse a los nuevos inputs
-        if (inputGroup) {
-            inputGroup.classList.add('oculto');
-            document.getElementById(`grade${contadorTalonarios}`).value = "0";
+        const fieldset = document.querySelector(`fieldset:nth-of-type(${contadorTalonarios})`);
+        if (fieldset) {
+            fieldset.classList.add('oculto');
+            document.getElementById(`expediente${contadorTalonarios}`).value = "";
             document.getElementById(`from${contadorTalonarios}`).value = "";
             document.getElementById(`to${contadorTalonarios}`).value = "";
+            document.getElementById(`grade${contadorTalonarios}`).value = "0";
             contadorTalonarios--;
         }
     } else {
@@ -106,9 +111,8 @@ function descargarTabla() {
     let totalM3Tn = 0;
     let valorTotal = 0;
     let filas = [];
-    let valid = true; // Variable para validar los inputs
+    let valid = true;
 
-    // Verificar si los campos nombrePM y numeroPM están vacíos
     if (!nombrePM || !numeroPM) {
         Swal.fire({
             title: 'Error',
@@ -119,7 +123,6 @@ function descargarTabla() {
         return;
     }
 
-    // Verificar si el campo grade0 es válido
     if (grade0 <= 0) {
         Swal.fire({
             title: 'Error',
@@ -134,9 +137,9 @@ function descargarTabla() {
         const fromValue = document.getElementById(`from${i}`).value.trim();
         const toValue = document.getElementById(`to${i}`).value.trim();
         const gradeValue = parseFloat(document.getElementById(`grade${i}`).value) || 0;
+        const expedienteValue = document.getElementById(`expediente${i}`).value.trim();
 
-        // Verificar si los campos de talonario están vacíos o si los valores son no válidos
-        if (!fromValue || !toValue || gradeValue <= 0) {
+        if (!fromValue || !toValue || gradeValue <= 0 || !expedienteValue) {
             valid = false;
             break;
         }
@@ -145,10 +148,9 @@ function descargarTabla() {
         totalM3Tn += gradeValue;
         valorTotal += valorTalonario;
 
-        filas.push([`Talonario ${i}`, fromValue, toValue, gradeValue, valorTalonario.toFixed(2)]);
+        filas.push([`Talonario ${i}`, expedienteValue, fromValue, toValue, gradeValue, valorTalonario.toFixed(2)]);
     }
 
-    // Mostrar un mensaje de error si hay campos vacíos o no válidos
     if (!valid) {
         Swal.fire({
             title: 'Error',
@@ -159,21 +161,140 @@ function descargarTabla() {
         return;
     }
 
-    filas.push(["Total", "", "", totalM3Tn, valorTotal.toFixed(2)]);
+    filas.push(["Total", "", "", "", totalM3Tn, valorTotal.toFixed(2)]);
 
     doc.text("Informe de Talonarios", 20, 20);
     doc.text(`Nombre de PM: ${nombrePM}`, 20, 30);
     doc.text(`N° de PM: ${numeroPM}`, 20, 40);
     doc.autoTable({
-        head: [["Talonario", "Desde", "Hasta", "M³/Tn", "Valor"]],
+        head: [["Talonario", "Expediente", "Desde", "Hasta", "M³/Tn", "Valor"]],
         body: filas,
         startY: 50
     });
 
     doc.save("informe_talonarios.pdf");
 }
+document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
 
-// Initial call to update indicators on page load
-document.addEventListener("DOMContentLoaded", function() {
-    updateIndicators();
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        burger.classList.toggle('toggle');
+    });
 });
+document.addEventListener("DOMContentLoaded", function() {
+    updateTotal();
+});
+
+function calcularTotal() {
+    const nombrePM = document.getElementById('nombrePM').value.trim();
+    const numeroPM = document.getElementById('numeroPM').value.trim();
+    const expedientes = [
+        {
+            nombre: document.getElementById('nombreExpediente1').value.trim(),
+            numero: document.getElementById('numeroExpediente1').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios1').value) || 0
+        },
+        {
+            nombre: document.getElementById('nombreExpediente2').value.trim(),
+            numero: document.getElementById('numeroExpediente2').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios2').value) || 0
+        },
+        {
+            nombre: document.getElementById('nombreExpediente3').value.trim(),
+            numero: document.getElementById('numeroExpediente3').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios3').value) || 0
+        }
+    ];
+
+    // Validar al menos un expediente completo antes de calcular
+    if (!nombrePM || !numeroPM || expedientes.every(exp => !exp.nombre || !exp.numero || exp.cantidad <= 0)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Por favor, complete todos los campos en al menos un expediente correctamente.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+        return;
+    }
+
+    const valorTalonario = 3500; // Valor fijo del talonario
+    const valorTotal = expedientes.reduce((acc, exp) => acc + (exp.nombre && exp.numero && exp.cantidad > 0 ? exp.cantidad * valorTalonario : 0), 0);
+    const valorTotalFormatted = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(valorTotal);
+    
+    document.getElementById('valorTotal').innerHTML = `<strong>Valor Total: ${valorTotalFormatted}</strong>`;
+}
+
+function generarPDF() {
+    const nombrePM = document.getElementById('nombrePM').value.trim();
+    const numeroPM = document.getElementById('numeroPM').value.trim();
+    const expedientes = [
+        {
+            nombre: document.getElementById('nombreExpediente1').value.trim(),
+            numero: document.getElementById('numeroExpediente1').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios1').value) || 0
+        },
+        {
+            nombre: document.getElementById('nombreExpediente2').value.trim(),
+            numero: document.getElementById('numeroExpediente2').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios2').value) || 0
+        },
+        {
+            nombre: document.getElementById('nombreExpediente3').value.trim(),
+            numero: document.getElementById('numeroExpediente3').value.trim(),
+            cantidad: parseInt(document.getElementById('cantidadTalonarios3').value) || 0
+        }
+    ];
+
+    // Validar al menos un expediente completo antes de generar el PDF
+    if (!nombrePM || !numeroPM || expedientes.every(exp => !exp.nombre || !exp.numero || exp.cantidad <= 0)) {
+        Swal.fire({
+            title: 'Error',
+            text: 'Por favor, complete todos los campos en al menos un expediente correctamente.',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        });
+        return;
+    }
+
+    const valorTalonario = 3500; // Valor fijo del talonario
+    const valorTotal = expedientes.reduce((acc, exp) => acc + (exp.nombre && exp.numero && exp.cantidad > 0 ? exp.cantidad * valorTalonario : 0), 0);
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text("Informe de Compra de Talonarios", 20, 20);
+    doc.text(`Nombre de PM: ${nombrePM}`, 20, 30);
+    doc.text(`Número de PM: ${numeroPM}`, 20, 40);
+
+    const tableData = expedientes
+        .filter(exp => exp.nombre && exp.numero && exp.cantidad > 0)
+        .map((exp, index) => [
+            `Expediente ${index + 1}`, 
+            exp.nombre, 
+            exp.numero, 
+            exp.cantidad, 
+            new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(exp.cantidad * valorTalonario)
+        ]);
+
+    doc.autoTable({
+        startY: 50,
+        head: [['Expediente', 'Nombre', 'Número', 'Cantidad de Talonarios', 'Valor Total']],
+        body: tableData
+    });
+
+    doc.text(`Valor del Talonario: $3,500`, 20, doc.autoTable.previous.finalY + 10);
+    doc.text(`Valor Total: ${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(valorTotal)}`, 20, doc.autoTable.previous.finalY + 20);
+
+    doc.save("informe_talonarios.pdf");
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateTotal();
+});
+
+function updateTotal() {
+    // Inicializar valor total en 0
+    document.getElementById('valorTotal').innerHTML = '<strong>Valor Total: $0.00</strong>';
+}
