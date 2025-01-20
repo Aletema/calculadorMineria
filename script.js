@@ -219,7 +219,7 @@ function calcularTotal() {
         return;
     }
 
-    const valorTalonario = 3500; // Valor fijo del talonario
+    const valorTalonario = 9000; // Valor fijo del talonario
     const valorTotal = expedientes.reduce((acc, exp) => acc + (exp.nombre && exp.numero && exp.cantidad > 0 ? exp.cantidad * valorTalonario : 0), 0);
     const valorTotalFormatted = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(valorTotal);
     
