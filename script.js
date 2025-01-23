@@ -258,7 +258,7 @@ function generarPDF() {
         return;
     }
 
-    const valorTalonario = 3500; // Valor fijo del talonario
+    const valorTalonario = 9000; // Valor fijo del talonario
     const valorTotal = expedientes.reduce((acc, exp) => acc + (exp.nombre && exp.numero && exp.cantidad > 0 ? exp.cantidad * valorTalonario : 0), 0);
 
     const { jsPDF } = window.jspdf;
@@ -284,7 +284,7 @@ function generarPDF() {
         body: tableData
     });
 
-    doc.text(`Valor del Talonario: $3,500`, 20, doc.autoTable.previous.finalY + 10);
+    doc.text(`Valor del Talonario: $9.000`, 20, doc.autoTable.previous.finalY + 10);
     doc.text(`Valor Total: ${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(valorTotal)}`, 20, doc.autoTable.previous.finalY + 20);
 
     doc.save("informe_talonarios.pdf");
